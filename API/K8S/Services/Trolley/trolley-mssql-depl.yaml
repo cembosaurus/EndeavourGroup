@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trolley-mssql-depl
+  labels:
+    app: trolley-mssql-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trolley-mssql
+  template:
+    metadata:
+      labels:
+        app: trolley-mssql
+    spec:
+      containers:
+        - name: trolley-mssql
+          image: mcr.microsoft.com/mssql/server:2017-latest
+          ports:
+            - containerPort: 1433
+          env:
+          - name: MSSQL_PID
+            value: "Express"
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: trolley-mssql
+                key: SA_PASSWORD
+          volumeMounts:
+          - mountPath: /var/opt/mssql/data
+            name: trolley-mssqldb
+      volumes:
+      - name: trolley-mssqldb
+        persistentVolumeClaim:
+          claimName: trolley-mssql-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trolley-mssql-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: trolley-mssql
+  ports:
+  - name: trolley-mssql
+    protocol: TCP
+    port: 1003
+    targetPort: 1433
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trolley-mssql-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: trolley-mssql
+  ports:
+  - protocol: TCP
+    port: 1003
+    targetPort: 1433

@@ -1,0 +1,184 @@
+
+
+----------------------- DOCKER --------------------------------
+
+
+// run from ROOT 'endeavourgroup' folder:
+
+HTTP:
+
+docker build -t cembo/endeavourgroup_api_gateway -f api_gateway/Dockerfile .
+docker push cembo/endeavourgroup_api_gateway
+
+docker build -t cembo/endeavourgroup_inventory -f services/inventory/Dockerfile .
+docker push cembo/endeavourgroup_inventory
+
+docker build -t cembo/endeavourgroup_trolley -f services/trolley/Dockerfile .
+docker push cembo/endeavourgroup_trolley
+
+docker build -t cembo/endeavourgroup_static_content -f services/staticcontent/Dockerfile .
+docker push cembo/endeavourgroup_static_content
+
+
+----------------------- KUBERNETES --------------------------------
+
+----------- DB:
+
+
+HTTP:
+
+kubectl create secret generic inventory-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
+kubectl create secret generic trolley-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
+
+kubectl apply -f inventory-pvc.yaml
+kubectl apply -f trolley-pvc.yaml
+
+kubectl apply -f inventory-mssql-depl.yaml
+kubectl apply -f trolley-mssql-depl.yaml
+
+
+
+DB USER:
+
+RUN: SQL script 'create-db-user.sql' for all DBs to create 'testUser':
+
+DB LogIns:
+
+HTTP:
+
+- inventory-mssql-clusterip-srv, port: 1002
+- trolley-mssql-clusterip-srv, port: 1003
+
+
+
+----------- SERVICES:
+
+HTTP:
+
+kubectl apply -f api-gateway-service-depl.yaml
+kubectl apply -f inventory-service-depl.yaml
+kubectl apply -f trolley-service-depl.yaml
+kubectl apply -f static-content-service-depl.yaml
+
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+
+
+
+
+----------------------- DELETE --------------------------------
+
+
+----------- SERVICES:
+
+HTTP:
+
+kubectl delete deployment api-gateway-service-depl
+kubectl delete deployment inventory-service-depl
+kubectl delete deployment trolley-service-depl
+kubectl delete deployment static-content-service-depl
+
+
+HTTP:
+
+kubectl delete service api-gateway-service-clusterip-srv
+kubectl delete service inventory-service-clusterip-srv
+kubectl delete service trolley-service-clusterip-srv
+kubectl delete service static-content-service-clusterip-srv
+
+
+----------- DB:
+
+HTTP:
+
+kubectl delete deployment inventory-mssql-depl
+kubectl delete deployment trolley-mssql-depl
+
+kubectl delete service inventory-mssql-clusterip-srv
+kubectl delete service trolley-mssql-clusterip-srv
+kubectl delete service scheduler-mssql-clusterip-srv
+
+kubectl delete service inventory-mssql-loadbalancer 
+kubectl delete service trolley-mssql-loadbalancer 
+kubectl delete service scheduler-mssql-loadbalancer 
+
+kubectl delete pvc inventory-mssql-claim
+kubectl delete pvc trolley-mssql-claim
+kubectl delete pvc scheduler-mssql-claim
+
+kubectl delete secret inventory-mssql
+kubectl delete secret trolley-mssql
+kubectl delete secret scheduler-mssql
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------- BATCH execution: ---------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BUILD:
+
+
+docker build -t cembo/endeavourgroup_api_gateway -f api_gateway/Dockerfile .
+docker push cembo/endeavourgroup_api_gateway
+docker build -t cembo/endeavourgroup_inventory -f services/inventory/Dockerfile .
+docker push cembo/endeavourgroup_inventory
+docker build -t cembo/endeavourgroup_trolley -f services/trolley/Dockerfile .
+docker push cembo/endeavourgroup_trolley
+docker build -t cembo/endeavourgroup_static_content -f services/staticcontent/Dockerfile .
+docker push cembo/endeavourgroup_static_content
+cls
+
+
+
+DEPLOY:
+
+
+kubectl create secret generic inventory-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
+kubectl create secret generic trolley-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
+kubectl apply -f k8s/services.sync/inventory/inventory-pvc.yaml
+kubectl apply -f k8s/services.sync/trolley/trolley-pvc.yaml
+kubectl apply -f k8s/services.sync/inventory/inventory-mssql-depl.yaml
+kubectl apply -f k8s/services.sync/trolley/trolley-mssql-depl.yaml
+kubectl apply -f k8s/api_gateway/api-gateway-service-depl.yaml
+kubectl apply -f k8s/services.sync/inventory/inventory-service-depl.yaml
+kubectl apply -f k8s/services.sync/trolley/trolley-service-depl.yaml
+kubectl apply -f k8s/services.sync/static_content/static-content-service-depl.yaml
+kubectl get pods
+
+---
+
+
+DELETE:
+
+
+kubectl delete deployment api-gateway-service-depl
+kubectl delete deployment inventory-service-depl
+kubectl delete deployment trolley-service-depl
+kubectl delete deployment static-content-service-depl
+kubectl delete service api-gateway-service-clusterip-srv
+kubectl delete service inventory-service-clusterip-srv
+kubectl delete service trolley-service-clusterip-srv
+kubectl delete service static-content-service-clusterip-srv
+kubectl delete deployment inventory-mssql-depl
+kubectl delete deployment trolley-mssql-depl
+kubectl delete service inventory-mssql-clusterip-srv
+kubectl delete service trolley-mssql-clusterip-srv
+kubectl delete service inventory-mssql-loadbalancer 
+kubectl delete service trolley-mssql-loadbalancer 
+kubectl delete pvc inventory-mssql-claim
+kubectl delete pvc trolley-mssql-claim
+kubectl delete secret inventory-mssql
+kubectl delete secret trolley-mssql
+kubectl get pods
+
+---
+
+
+

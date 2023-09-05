@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: inventory-service-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: endeavourgroup-inventory
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: endeavourgroup-inventory
+        version: v01
+    spec:
+      containers:
+        - name: endeavourgroup-inventory
+          image: cembo/endeavourgroup_inventory:latest
+          ports:
+            - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: endeavourgroup-inventory
+  ports:
+    - name: endeavourgroup-inventory
+      protocol: TCP
+      port: 80
+      targetPort: 80
