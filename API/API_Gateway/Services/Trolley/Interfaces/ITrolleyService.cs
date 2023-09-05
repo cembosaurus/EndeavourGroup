@@ -12,5 +12,6 @@ namespace API_Gateway.Services.Trolley.Interfaces
         Task<IServiceResult<bool>> ExistsTrolleyByTrolleyId(Guid trolleyId);
         Task<IServiceResult<IEnumerable<TrolleyReadDTO>>> GetTrolleys();
         Task<IServiceResult<TrolleyReadDTO>> GetTrolleyByUserId(int userId);
+        Task<IServiceResult<TrolleyReadDTO>> GetUsersTrolleyDiscounted(int userId);
     }
 }

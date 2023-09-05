@@ -88,6 +88,18 @@ namespace API_Gateway.Controllers.Trolley
 
 
 
+        // Trolley with Promotions:
+
+
+        [HttpGet("discounted")]
+        public async Task<IActionResult> GetUsersTrolleyDiscounted([FromRoute] GetTrolleyDTO getTrolleyDTO)
+        {
+            var result = await _trolleyService.GetUsersTrolleyDiscounted(getTrolleyDTO.UserId ?? 0);
+
+            return result.Status ? Ok(result) : BadRequest(result);
+        }
+
+
 
         // POST:
 

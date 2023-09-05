@@ -34,7 +34,8 @@ namespace Trolley.Profiles
 
             // Trolley-Promotions:
 
-            CreateMap<TrolleyPromotion, TrolleyPromotionReadDTO>();
+            CreateMap<TrolleyPromotion, TrolleyPromotionReadDTO>()
+                .ForMember(dest => dest.TrolleyPromotionType, cfg => cfg.MapFrom(src => src.TrolleyPromotionType));
             CreateMap<TrolleyPromotionCreateDTO, TrolleyPromotion>();
             CreateMap<TrolleyPromotionType, TrolleyPromotionTypeReadDTO>();
             CreateMap<TrolleyPromotionTypeCreateDTO, TrolleyPromotionType>();

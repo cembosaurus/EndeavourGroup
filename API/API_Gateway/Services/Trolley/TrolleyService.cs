@@ -1,4 +1,5 @@
-﻿using API_Gateway.HttpServices.Trolley.Interfaces;
+﻿using API_Gateway.HttpServices.Trolley;
+using API_Gateway.HttpServices.Trolley.Interfaces;
 using API_Gateway.Services.Trolley.Interfaces;
 using Business.Libraries.ServiceResult.Interfaces;
 using Business.Trolley.DTOs;
@@ -11,11 +12,12 @@ namespace API_Gateway.Services.Trolley
     {
 
         private readonly IHttpTrolleyService _httpTrolleyService;
+        private readonly IHttpTrolleyPromotionService _httpTrolleyPromotionService;
 
-
-        public TrolleyService(IHttpTrolleyService httpTrolleyService)
+        public TrolleyService(IHttpTrolleyService httpTrolleyService, IHttpTrolleyPromotionService httpTrolleyPromotionService)
         {
             _httpTrolleyService = httpTrolleyService;
+            _httpTrolleyPromotionService = httpTrolleyPromotionService;
         }
 
 
@@ -32,6 +34,18 @@ namespace API_Gateway.Services.Trolley
         public async Task<IServiceResult<TrolleyReadDTO>> GetTrolleyByUserId(int userId)
         {
             return await _httpTrolleyService.GetTrolleyByUserId(userId);
+        }
+
+
+
+        public async Task<IServiceResult<TrolleyReadDTO>> GetUsersTrolleyDiscounted(int userId)
+        {
+            var trolley = await _httpTrolleyService.GetTrolleyByUserId(userId);
+            var discounts = await _httpTrolleyPromotionService.GetActiveTrolleyPromotions();
+
+            //............................................................................................... To Do: apply active trolley promotions to trolley ......
+
+            return null;
         }
 
 
