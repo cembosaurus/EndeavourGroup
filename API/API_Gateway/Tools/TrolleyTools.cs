@@ -46,7 +46,7 @@ namespace API_Gateway.Tools
                     case 1:
                         // Buy one and get one free
 
-                        var freeProductAmount = product.Amount % 2 == 0 ? product.Amount / 2 : product.Amount - 1 / 2;
+                        var freeProductAmount = (product.Amount % 2 == 0) ? product.Amount / 2 : (product.Amount - 1) / 2;
 
                         product.ProductTotal = (product.Amount - freeProductAmount) * product.ProductDiscountedPrice;
 
@@ -54,7 +54,7 @@ namespace API_Gateway.Tools
                     case 2:
                         // Buy one get second one for half price
 
-                        var halfPricedProductAmount = product.Amount % 2 == 0 ? product.Amount / 2 : product.Amount - 1 / 2;
+                        var halfPricedProductAmount = (product.Amount % 2 == 0) ? product.Amount / 2 : (product.Amount - 1) / 2;
 
                         product.ProductTotal = (product.Amount - (halfPricedProductAmount / 2)) * product.ProductDiscountedPrice;
 
@@ -62,7 +62,7 @@ namespace API_Gateway.Tools
                     case 3:
                         // Spend and save
 
-                        product.ProductTotal = (product.ProductDiscountedPrice * product.Amount) -  (((product.Amount * product.ProductDiscountedPrice) / 100) * promotion.DiscountPercent);
+                        product.ProductTotal = (product.ProductDiscountedPrice * product.Amount) - (((product.Amount * product.ProductDiscountedPrice) / 100) * promotion.DiscountPercent);
 
                         break;
                 }

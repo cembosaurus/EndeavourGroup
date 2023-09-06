@@ -3,7 +3,7 @@
 ----------------------- DOCKER --------------------------------
 
 
-// run from ROOT 'endeavourgroup' folder:
+// run from ROOT 'endeavourgroup/API' folder:
 
 HTTP:
 
