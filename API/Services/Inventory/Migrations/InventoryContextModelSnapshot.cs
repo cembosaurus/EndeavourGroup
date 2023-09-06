@@ -72,11 +72,11 @@ namespace Inventory.Migrations
                     b.Property<int?>("DiscountPercent")
                         .HasColumnType("int");
 
-                    b.Property<double?>("RRP")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("RRP")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double>("SalePrice")
-                        .HasColumnType("float");
+                    b.Property<decimal>("SalePrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProductId");
 

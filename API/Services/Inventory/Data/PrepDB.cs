@@ -47,8 +47,8 @@ namespace Services.Inventory.Data
                             PhotoURL = Photo("VictoriaBitter.jpg")
                         },
                         ProductPrice = new ProductPrice { 
-                            SalePrice = 21.49,
-                            RRP = 21.49,
+                            SalePrice = (decimal)21.49,
+                            RRP = (decimal)21.49,
                             DiscountPercent = 10
                         },
                         Description = "........................ description of Victoria Bitter ...........................",
@@ -61,8 +61,8 @@ namespace Services.Inventory.Data
                             PhotoURL = Photo("CrownLager.jpg")
                         }, 
                         ProductPrice = new ProductPrice { 
-                            SalePrice = 22.99,
-                            RRP = 22.99,
+                            SalePrice = (decimal)22.99,
+                            RRP = (decimal)22.99,
                             DiscountPercent = 5
                         },
                         Description = "........................ description of Crown Lager ...........................",
@@ -75,8 +75,8 @@ namespace Services.Inventory.Data
                             PhotoURL = Photo("Coopers.jpg")
                         }, 
                         ProductPrice = new ProductPrice { 
-                            SalePrice = 20.49,
-                            RRP = 20.49,
+                            SalePrice = (decimal)20.49,
+                            RRP = (decimal)20.49,
                             DiscountPercent = 0
                         },
                         Description = "........................ description of Coopers ...........................",
@@ -89,8 +89,8 @@ namespace Services.Inventory.Data
                             PhotoURL = Photo("TooheysExtraDry.jpg")
                         }, 
                         ProductPrice = new ProductPrice { 
-                            SalePrice = 19.99,
-                            RRP = 19.99,
+                            SalePrice = (decimal)19.99,
+                            RRP = (decimal)19.99,
                             DiscountPercent = 0
                         },
                         Description = "........................ description of Tooheys Extra Dry ...........................",

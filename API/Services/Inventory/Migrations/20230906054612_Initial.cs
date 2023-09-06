@@ -50,8 +50,8 @@ namespace Inventory.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    SalePrice = table.Column<double>(type: "float", nullable: false),
-                    RRP = table.Column<double>(type: "float", nullable: true),
+                    SalePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RRP = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DiscountPercent = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

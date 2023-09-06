@@ -21,7 +21,7 @@ namespace Business.Trolley.Http
         public HttpTrolleyProductClient(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _baseUri = config.GetSection("RemoteServices:TrolleyService").Value + "/api/trolley";
+            _baseUri = config.GetSection("RemoteServices:TrolleyService").Value + "/api/trolleyproduct";
         }
 
 
@@ -32,7 +32,7 @@ namespace Business.Trolley.Http
         {
             InitializeHttpRequestMessage(
                 HttpMethod.Post,
-                $"/{userId}/products",
+                $"/{userId}",
                 new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new { products }), _encoding, _mediaType)
             );
 
@@ -49,7 +49,7 @@ namespace Business.Trolley.Http
         {
             InitializeHttpRequestMessage(
                 HttpMethod.Delete,
-                $"/{userId}/products/delete",
+                $"/{userId}/delete",
                 new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(new { products }), _encoding, _mediaType)
             );
 
@@ -64,7 +64,7 @@ namespace Business.Trolley.Http
         {
             InitializeHttpRequestMessage(
                 HttpMethod.Get,
-                $"/products/all"
+                $"/all"
             );
 
             Console.WriteLine($"---> GETTING all trolley products ....");
@@ -78,7 +78,7 @@ namespace Business.Trolley.Http
         {
             InitializeHttpRequestMessage(
                 HttpMethod.Get,
-                $"/{userId}/products"
+                $"/{userId}"
             );
 
             Console.WriteLine($"---> GETTING trolley products for trolley '{userId}' ....");

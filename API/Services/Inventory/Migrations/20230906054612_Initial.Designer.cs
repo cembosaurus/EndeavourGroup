@@ -12,7 +12,7 @@ using Services.Inventory.Data;
 namespace Inventory.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20230905140451_Initial")]
+    [Migration("20230906054612_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -75,11 +75,11 @@ namespace Inventory.Migrations
                     b.Property<int?>("DiscountPercent")
                         .HasColumnType("int");
 
-                    b.Property<double?>("RRP")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("RRP")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double>("SalePrice")
-                        .HasColumnType("float");
+                    b.Property<decimal>("SalePrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProductId");
 

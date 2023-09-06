@@ -2,13 +2,13 @@
 using Business.Trolley.DTOs;
 using Services.Trolley.Models;
 using Trolley.HttpServices.Interfaces;
-using Trolley.TrolleyBusinessLogic.Interfaces;
+using Trolley.Tools.Interfaces;
 
 
 
-namespace Trolley.TrolleyBusinessLogic
+namespace Trolley.Tools
 {
-    public class TrolleyTools : ITrolleyBusinessLogic
+    public class TrolleyTools : ITools
     {
 
         private readonly IHttpInventoryService _httpInventoryService;
@@ -26,10 +26,10 @@ namespace Trolley.TrolleyBusinessLogic
 
 
 
-        public async Task<IServiceResult<double>> UpdateTrolleyTotal(Trolley_model trolley)
+        public async Task<IServiceResult<decimal>> UpdateTrolleyTotal(Trolley_model trolley)
         {
             if (trolley == null)
-                return _resultFact.Result<double>(0, false, $"Trolley was NOT provided !");
+                return _resultFact.Result<decimal>(0, false, $"Trolley was NOT provided !");
 
 
             var message = "";
@@ -207,7 +207,8 @@ namespace Trolley.TrolleyBusinessLogic
 
                 t.Name = product.Data.Product.Name;
                 t.SalePrice = price.Data.SalePrice;
-                t.DiscountedPrice = price.Data.DiscountedPrice;
+                t.ProductDiscountedPrice = price.Data.DiscountedPrice;
+                t.ProductTotal = price.Data.DiscountedPrice * t.Amount;
             }
         }
 

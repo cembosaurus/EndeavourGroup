@@ -43,8 +43,8 @@ namespace Trolley.Migrations
                     b.Property<Guid>("TrolleyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -65,10 +65,10 @@ namespace Trolley.Migrations
                     b.Property<bool>("IsOn")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PriceLevel")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("SpendLevel")
                         .HasColumnType("int");
 
                     b.HasKey("TrolleyPromotionTypeId");

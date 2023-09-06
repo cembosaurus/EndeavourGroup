@@ -12,8 +12,8 @@ using Trolley.Data;
 namespace Trolley.Migrations
 {
     [DbContext(typeof(TrolleyContext))]
-    [Migration("20230904010405_Promotions_1")]
-    partial class Promotions_1
+    [Migration("20230906055511_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,8 +46,8 @@ namespace Trolley.Migrations
                     b.Property<Guid>("TrolleyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Total")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -68,10 +68,10 @@ namespace Trolley.Migrations
                     b.Property<bool>("IsOn")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PriceLevel")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("SpendLevel")
                         .HasColumnType("int");
 
                     b.HasKey("TrolleyPromotionTypeId");

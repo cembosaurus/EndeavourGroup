@@ -6,6 +6,9 @@ using API_Gateway.Services.Inventory;
 using API_Gateway.Services.Inventory.Interfaces;
 using API_Gateway.Services.Trolley;
 using API_Gateway.Services.Trolley.Interfaces;
+using API_Gateway.Tools;
+using API_Gateway.Tools.Interfaces;
+using Business.Filters.Validation;
 using Business.Inventory.Http;
 using Business.Inventory.Http.Interfaces;
 using Business.Libraries.ServiceResult;
@@ -13,10 +16,20 @@ using Business.Libraries.ServiceResult.Interfaces;
 using Business.Middlewares;
 using Business.Trolley.Http;
 using Business.Trolley.Http.Interfaces;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add<ValidationFilter>();
+});
+
+builder.Services.AddFluentValidation(conf => {
+    conf.DisableDataAnnotationsValidation = true;
+    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+    conf.AutomaticValidationEnabled = true;
+});
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -34,6 +47,8 @@ builder.Services.AddScoped<IHttpProductPriceService, HttpProductPriceService>();
 builder.Services.AddScoped<IHttpTrolleyService, HttpTrolleyService>();
 builder.Services.AddScoped<IHttpTrolleyProductService, HttpTrolleyProductService>();
 builder.Services.AddScoped<IHttpTrolleyPromotionService, HttpTrolleyPromotionService>();
+
+builder.Services.AddTransient<ITrolleyTools, TrolleyTools>();
 
 
 builder.Services.AddHttpClient<IHttpCatalogueProductClient, HttpCatalogueProductClient>(client => {

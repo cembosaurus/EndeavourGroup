@@ -4,16 +4,16 @@ using Services.Trolley.Models;
 
 
 
-namespace Trolley.TrolleyBusinessLogic.Interfaces
+namespace Trolley.Tools.Interfaces
 {
-    public interface ITrolleyBusinessLogic
+    public interface ITools
     {
         Task<IServiceResult<int>> AddAmountToStock(int productId, int amount);
         Task<IServiceResult<IEnumerable<TrolleyProduct>>> AddProductsToTrolley(Trolley_model trolley, IEnumerable<TrolleyProduct> source);
         Task GetCatalogueProductsIntoTrolley(ICollection<TrolleyProductReadDTO> products);
         Task<IServiceResult<int>> RemoveAmountFromStock(int productId, int amount);
         Task<IServiceResult<IEnumerable<TrolleyProduct>>> RemoveProductsFromTrolley(Trolley_model trolley, IEnumerable<TrolleyProduct> source);
-        Task<IServiceResult<double>> UpdateTrolleyTotal(Trolley_model trolley);
+        Task<IServiceResult<decimal>> UpdateTrolleyTotal(Trolley_model trolley);
 
     }
 }

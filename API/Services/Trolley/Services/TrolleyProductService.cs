@@ -5,7 +5,7 @@ using Services.Trolley.Models;
 using Trolley.Data.Repositories.Interfaces;
 using Trolley.HttpServices.Interfaces;
 using Trolley.Services.Interfaces;
-using Trolley.TrolleyBusinessLogic.Interfaces;
+using Trolley.Tools.Interfaces;
 
 
 
@@ -15,17 +15,17 @@ namespace Trolley.Services
     {
 
         private readonly IHttpInventoryService _httpInventoryService;
-        private readonly ITrolleyBusinessLogic _trolleyBusinessLogic;
+        private readonly ITools _tools;
         private readonly ITrolleyProductsRepository _trolleyProductRepo;
         private readonly ITrolleyRepository _trolleyRepo;
         private readonly IServiceResultFactory _resultFact;
         private readonly IMapper _mapper;
 
 
-        public TrolleyProductService(ITrolleyProductsRepository trolleyProductRepo, ITrolleyRepository trolleyRepo, IServiceResultFactory resultFact, IMapper mapper, ITrolleyBusinessLogic trolleyBusinessLogic, IHttpInventoryService httpInventoryService)
+        public TrolleyProductService(ITrolleyProductsRepository trolleyProductRepo, ITrolleyRepository trolleyRepo, IServiceResultFactory resultFact, IMapper mapper, ITools tools, IHttpInventoryService httpInventoryService)
         {
             _httpInventoryService = httpInventoryService;
-            _trolleyBusinessLogic = trolleyBusinessLogic;
+            _tools = tools;
             _trolleyProductRepo = trolleyProductRepo;
             _trolleyRepo = trolleyRepo;
             _resultFact = resultFact;
@@ -55,7 +55,7 @@ namespace Trolley.Services
 
             var result = _mapper.Map<ICollection<TrolleyProductReadDTO>>(trolleyProducts);
 
-            await _trolleyBusinessLogic.GetCatalogueProductsIntoTrolley(result);
+            await _tools.GetCatalogueProductsIntoTrolley(result);
 
 
             return _resultFact.Result(_mapper.Map<IEnumerable<TrolleyProductReadDTO>>(result), true, message);
@@ -99,7 +99,7 @@ namespace Trolley.Services
 
             var trolleyProducts = _mapper.Map<IEnumerable<TrolleyProduct>>(productsToAdd);
 
-            var addProductsToTrolleyResult = await _trolleyBusinessLogic.AddProductsToTrolley(trolley, trolleyProducts);
+            var addProductsToTrolleyResult = await _tools.AddProductsToTrolley(trolley, trolleyProducts);
 
             if (!addProductsToTrolleyResult.Status || _trolleyProductRepo.SaveChanges() < 1)
                 return _resultFact.Result<IEnumerable<TrolleyProductReadDTO>>(null, addProductsToTrolleyResult.Status, addProductsToTrolleyResult.Message);
@@ -110,7 +110,7 @@ namespace Trolley.Services
 
             foreach (var ci in trolleyProducts)
             {
-                var addToStockResult = await _trolleyBusinessLogic.RemoveAmountFromStock(ci.ProductId, ci.Amount);
+                var addToStockResult = await _tools.RemoveAmountFromStock(ci.ProductId, ci.Amount);
 
                 if (!addToStockResult.Status)
                     message += Environment.NewLine + $"Amount '{ci.Amount}' for product '{ci.ProductId}' was NOT removed from stock ! Reason: {addToStockResult.Message}";
@@ -120,7 +120,7 @@ namespace Trolley.Services
             Console.WriteLine($"--> UPDATING trolley total ......");
 
 
-            var updateTrolleyTotal = await _trolleyBusinessLogic.UpdateTrolleyTotal(trolley);
+            var updateTrolleyTotal = await _tools.UpdateTrolleyTotal(trolley);
 
             if (!updateTrolleyTotal.Status || _trolleyProductRepo.SaveChanges() < 1)
                 message += Environment.NewLine + $"Total for trolley '{trolley.UserId}' was NOT updated ! Reason: {updateTrolleyTotal.Message}";
@@ -169,7 +169,7 @@ namespace Trolley.Services
 
             var trolleyProducts = _mapper.Map<IEnumerable<TrolleyProduct>>(productsToRemove);
 
-            var removedTrolleyProductsResult = await _trolleyBusinessLogic.RemoveProductsFromTrolley(trolley, _mapper.Map<IEnumerable<TrolleyProduct>>(productsToRemove));
+            var removedTrolleyProductsResult = await _tools.RemoveProductsFromTrolley(trolley, _mapper.Map<IEnumerable<TrolleyProduct>>(productsToRemove));
 
             if (!removedTrolleyProductsResult.Status || _trolleyRepo.SaveChanges() < 1)
                 return _resultFact.Result(_mapper.Map<IEnumerable<TrolleyProductReadDTO>>(removedTrolleyProductsResult.Data), false, removedTrolleyProductsResult.Message);
@@ -178,7 +178,7 @@ namespace Trolley.Services
 
             foreach (var ci in removedTrolleyProductsResult.Data)
             {
-                var addToStockResult = await _trolleyBusinessLogic.AddAmountToStock(ci.ProductId, ci.Amount);
+                var addToStockResult = await _tools.AddAmountToStock(ci.ProductId, ci.Amount);
 
                 if (!addToStockResult.Status)
                     message += Environment.NewLine + $"Amount for product '{ci.ProductId}' was NOT returned into stock ! Reason: {addToStockResult.Message}";
@@ -188,7 +188,7 @@ namespace Trolley.Services
             Console.WriteLine($"--> UPDATING trolley 'Total' ......");
 
 
-            var updateTrolleyTotalResult = await _trolleyBusinessLogic.UpdateTrolleyTotal(trolley);
+            var updateTrolleyTotalResult = await _tools.UpdateTrolleyTotal(trolley);
 
             if (!updateTrolleyTotalResult.Status || _trolleyProductRepo.SaveChanges() < 1)
                 message += Environment.NewLine + $"Total in trolley '{trolley.UserId}' was NOT updated ! Reason: {updateTrolleyTotalResult.Message}";
@@ -240,7 +240,7 @@ namespace Trolley.Services
             Console.WriteLine($"--> UPDATING trolley total ......");
 
 
-            var updateTrolleyTotalResult = await _trolleyBusinessLogic.UpdateTrolleyTotal(trolley);
+            var updateTrolleyTotalResult = await _tools.UpdateTrolleyTotal(trolley);
 
             if (!updateTrolleyTotalResult.Status || _trolleyProductRepo.SaveChanges() < 1)
                 message += Environment.NewLine + $"Total in trolley '{trolley.UserId}' was NOT updated ! Reason: {updateTrolleyTotalResult.Message}";
@@ -250,7 +250,7 @@ namespace Trolley.Services
             {
                 Console.WriteLine($"--> ADDING amount for product '{ci.ProductId}' into stock ......");
 
-                var addAmountToStockResult = await _trolleyBusinessLogic.AddAmountToStock(ci.ProductId, ci.Amount);
+                var addAmountToStockResult = await _tools.AddAmountToStock(ci.ProductId, ci.Amount);
 
                 if (!addAmountToStockResult.Status)
                     message += Environment.NewLine + $"Amount for product '{ci.ProductId}' was NOT returned into stock ! Reson: '{addAmountToStockResult.Message}'";

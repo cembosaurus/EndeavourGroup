@@ -6,7 +6,7 @@ using Services.Trolley.Models;
 using Trolley.Data.Repositories.Interfaces;
 using Trolley.HttpServices.Interfaces;
 using Trolley.Services.Interfaces;
-using Trolley.TrolleyBusinessLogic.Interfaces;
+using Trolley.Tools.Interfaces;
 
 
 
@@ -19,16 +19,16 @@ namespace Trolley.Services
         private readonly IHttpInventoryService _httpInventoryService;
         private readonly IServiceResultFactory _resultFact;
         private readonly IMapper _mapper;
-        private readonly ITrolleyBusinessLogic _trolleyBusinessLogic;
+        private readonly ITools _tools;
 
 
-        public TrolleyService(ITrolleyRepository trolleyRepo, IServiceResultFactory resultFact, IMapper mapper, ITrolleyBusinessLogic trolleyBusinessLogic, IHttpInventoryService httpInventoryService)
+        public TrolleyService(ITrolleyRepository trolleyRepo, IServiceResultFactory resultFact, IMapper mapper, ITools tools, IHttpInventoryService httpInventoryService)
         {
             _trolleyRepo = trolleyRepo;
             _httpInventoryService = httpInventoryService;
             _resultFact = resultFact;
             _mapper = mapper;
-            _trolleyBusinessLogic = trolleyBusinessLogic;
+            _tools = tools;
         }
 
 
@@ -53,7 +53,7 @@ namespace Trolley.Services
             foreach (var t in result)
             {
                 if(t.TrolleyProducts.Any())
-                    await _trolleyBusinessLogic.GetCatalogueProductsIntoTrolley(t.TrolleyProducts);
+                    await _tools.GetCatalogueProductsIntoTrolley(t.TrolleyProducts);
             }
 
 
@@ -82,21 +82,23 @@ namespace Trolley.Services
 
             var productsResult = await _httpInventoryService.GetCatalogueProducts(productIds);
 
+
             if (productsResult != null || productsResult.Status)
             {
-                foreach (var ci in result.TrolleyProducts)
+                foreach (var tp in result.TrolleyProducts)
                 {
-                    ci.Name = productsResult.Data.FirstOrDefault(i => i.Product.Id == ci.ProductId).Product.Name;
+                    tp.Name = productsResult.Data.FirstOrDefault(i => i.Product.Id == tp.ProductId).Product.Name;
 
-                    var productPriceResult = await _httpInventoryService.GetProductPriceById(ci.ProductId);
+                    var productPriceResult = await _httpInventoryService.GetProductPriceById(tp.ProductId);
 
                     if (productPriceResult.Status)
                     {
-                        ci.SalePrice = productPriceResult.Data.SalePrice;
+                        tp.SalePrice = productPriceResult.Data.SalePrice;
+                        tp.ProductDiscountedPrice = productPriceResult.Data.DiscountedPrice;
                     }
                     else
                     {
-                        message += Environment.NewLine + $"Product price for product '{ci.ProductId}' was NOT found ! Reason: '{productPriceResult.Message}'";
+                        message += Environment.NewLine + $"Product price for product '{tp.ProductId}' was NOT found ! Reason: '{productPriceResult.Message}'";
                     }
                 }
             }
@@ -107,7 +109,7 @@ namespace Trolley.Services
 
 
             if (result.TrolleyProducts.Any())
-                await _trolleyBusinessLogic.GetCatalogueProductsIntoTrolley(result.TrolleyProducts);
+                await _tools.GetCatalogueProductsIntoTrolley(result.TrolleyProducts);
 
             return _resultFact.Result(result, true);
         }
@@ -167,7 +169,7 @@ namespace Trolley.Services
 
             foreach (var ci in trolley.TrolleyProducts)
             {
-                var updateStockAmountResult = await _trolleyBusinessLogic.AddAmountToStock(ci.ProductId, ci.Amount);
+                var updateStockAmountResult = await _tools.AddAmountToStock(ci.ProductId, ci.Amount);
 
                 if (!updateStockAmountResult.Status)
                     message += Environment.NewLine + $"Failed to restore amount '{ci.Amount}' into stock for product '{ci.ProductId}' ! Reason: '{updateStockAmountResult.Message}'";

@@ -7,12 +7,19 @@ namespace Business.Trolley.DTOs
     {
         public Guid TrolleyId { get; set; }
         public int UserId { get; set; }
-        public double Total { get; set; }
-        public double DiscountedTotal
+        public decimal Total { get; set; }
+        public decimal DiscountedTotal
         {
             get
             {
-                return TrolleyProducts.Sum(p => p.DiscountedPrice * p.Amount);
+                return TrolleyProducts.Sum(p => p.ProductDiscountedPrice * p.Amount);
+            }
+        }
+        public decimal SavedTotal
+        {
+            get
+            {
+                return Total - DiscountedTotal;
             }
         }
 

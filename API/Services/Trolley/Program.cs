@@ -14,8 +14,8 @@ using Trolley.HttpServices;
 using Trolley.HttpServices.Interfaces;
 using Trolley.Services;
 using Trolley.Services.Interfaces;
-using Trolley.TrolleyBusinessLogic;
-using Trolley.TrolleyBusinessLogic.Interfaces;
+using Trolley.Tools;
+using Trolley.Tools.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +41,7 @@ builder.Services.AddScoped<ITrolleyPromotionService, TrolleyPromotionService>();
 builder.Services.AddScoped<ITrolleyRepository,TrolleyRepository>();
 builder.Services.AddScoped<ITrolleyProductsRepository, TrolleyProductsRepository>();
 builder.Services.AddScoped<ITrolleyPromotionsRepository, TrolleyPromotionsRepository>();
-builder.Services.AddScoped<ITrolleyBusinessLogic, TrolleyTools>();
+builder.Services.AddScoped<ITools, TrolleyTools>();
 builder.Services.AddScoped<IHttpInventoryService, HttpInventoryService>();
 
 builder.Services.AddHttpClient<IHttpProductPriceClient, HttpProductPriceClient>();

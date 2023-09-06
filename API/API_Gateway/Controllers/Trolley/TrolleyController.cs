@@ -28,6 +28,11 @@ namespace API_Gateway.Controllers.Trolley
 
 
 
+
+        // .... To Do: separate domain into 3 controllers Trolley, TrolleyProducts and TrolleyPromotions so the URL mathces the remote services' URL. Easier to debug.
+
+
+
         // GET:
 
         // Trolley:
@@ -91,7 +96,7 @@ namespace API_Gateway.Controllers.Trolley
         // Trolley with Promotions:
 
 
-        [HttpGet("discounted")]
+        [HttpGet("{UserId}/discounted")]
         public async Task<IActionResult> GetUsersTrolleyDiscounted([FromRoute] GetTrolleyDTO getTrolleyDTO)
         {
             var result = await _trolleyService.GetUsersTrolleyDiscounted(getTrolleyDTO.UserId ?? 0);
@@ -118,7 +123,7 @@ namespace API_Gateway.Controllers.Trolley
 
         // Trolley Products:
 
-        [HttpPost("{userId}/products")]
+        [HttpPost("{UserId}/products")]
         public async Task<IActionResult> AddProductsToUsersTrolley([FromRoute] AddProductsToTrolleyDTO user, [FromBody] AddProductsToTrolleyDTO data)
         {
             // UserId in DTO is nullable, initialized by route value:

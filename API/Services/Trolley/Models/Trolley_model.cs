@@ -7,7 +7,7 @@ namespace Services.Trolley.Models
     {
         public Guid TrolleyId { get; set; }
         public int UserId { get; set; }        
-        public double Total { get; set; }
+        public decimal Total { get; set; }
 
         public ICollection<TrolleyProduct> TrolleyProducts { get; set; }
     }

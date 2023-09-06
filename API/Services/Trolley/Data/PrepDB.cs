@@ -62,7 +62,7 @@ namespace Services.Inventory.Data
                             Name = promotionsTypesList.Find(ptl => ptl.TrolleyPromotionTypeId == 1)?.Name ?? ""
                         },
                         ProductId = 3,
-                        PriceLevel = 0,
+                        SpendLevel = 0,
                         DiscountPercent = 0
                     },
                     new TrolleyPromotion()
@@ -76,7 +76,7 @@ namespace Services.Inventory.Data
                             Name = promotionsTypesList.Find(ptl => ptl.TrolleyPromotionTypeId == 2)?.Name ?? ""
                         },
                         ProductId = 0,
-                        PriceLevel = 0,
+                        SpendLevel = 0,
                         DiscountPercent = 0
                     },
                     new TrolleyPromotion()
@@ -89,9 +89,9 @@ namespace Services.Inventory.Data
                             Description = promotionsTypesList.Find(ptl => ptl.TrolleyPromotionTypeId == 3)?.Description ?? "",
                             Name = promotionsTypesList.Find(ptl => ptl.TrolleyPromotionTypeId == 3)?.Name ?? ""
                         },
-                        ProductId = 0,
-                        PriceLevel = 50,
-                        DiscountPercent = 5
+                        ProductId = 2,
+                        SpendLevel = 50,
+                        DiscountPercent = 7
                     }
                 ); ;
 
