@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ProductsAlbumComponent } from './API_Services/Inventory/CatalogueProduct/catalogue-product-album/catalogue-product-album.component';
+import { ProductsAlbumComponent } from './API_Services/Inventory/CatalogueProduct/catalogue-products-album/catalogue-products-album.component';
 import { HttpHeaderInterceptor } from './_interceptors/http.header.interceptor';
 import { HttpImagePipe } from './_pipes/http.image.pipe';
 import { AddCatalogueProductPopUpComponent } from './API_Services/Trolley/Trolley/add-catalogue-product-pop-up/add-catalogue-product-pop-up.component';
