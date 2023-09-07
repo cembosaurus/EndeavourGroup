@@ -1,4 +1,4 @@
-<h1>******************************************* UNDER CONSTRUCTION **************************************************</h1>
+<h1>******************************************* UNDER CONSTRUCTION ************* pricesare not correct right now, prices will be shown according test specs *************************************</h1>
 <div class="container my-5">     
   <div class="row">
     <a href="#!" class="btn btn-primary shadow-0 me-1" (click)="addToTrolley()">* * * SEND * * *</a>
@@ -8,8 +8,6 @@
 
         <div class="square">
           <img src={{_photosURL}}{{catalogueProduct.product.photoURL}} />
-          <!-- <img src={{getPhoto(catalogueProduct.product.photoURL)}} class="card-img-top" style="width: 100%; height: auto; margin: 0 auto;" /> -->
-          <!-- <img [src]='_photosURL + catalogueProduct.product.photoURL' class="card-img-top" style="width: 100%; height: auto; margin: 0 auto;" /> -->
         </div>
 
         <div class="card-body">
@@ -26,7 +24,6 @@
           <div class="card-footer d-flex align-products-end pb-3 px-0 pb-0 mb-auto">
             <a href="#!" class="btn btn-primary shadow-0 me-1" (click)="openAddProductDialog(catalogueProduct.productId)">Add to trolley</a>
             <p class="border px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1">{{getProductFromList(catalogueProduct.productId)?.amount ?? 0}}</i></p>
-            <!-- <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a> -->
           </div>
 
           <div class="card-product-description">
