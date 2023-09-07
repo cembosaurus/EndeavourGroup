@@ -5,6 +5,11 @@
 </head>
 
 <div>
-    <app-trolley></app-trolley>
-   <app-products-album></app-products-album> 
+
+    <div>
+        User ID: <input [(ngModel)]="_userId" (ngModelChange)="userIdChanged()" name="_userId" />
+      </div>
+
+    <app-trolley [_userId]="_userId"></app-trolley>
+   <app-products-album [_userId]="_userId"></app-products-album> 
 </div>

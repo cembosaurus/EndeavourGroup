@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../../../../_services/products.service';
 import { TrolleyService } from '../../../../_services/trolley.service';
 import { CatalogueProduct } from '../../../../_models/catalogueProduct';
@@ -17,6 +17,7 @@ import { TrolleyProductUpdateDTO } from 'src/app/_models/TrolleyProductUpdateDTO
 })
 export class ProductsAlbumComponent implements OnInit {
 
+  @Input() _userId: number = 0;
   _photosURL = environment.gatewayUrl + 'photos/';
   _catalogueProducts: CatalogueProduct[] | undefined;
   _selectedProducts: TrolleyProductUpdateDTO[] = new Array<TrolleyProductUpdateDTO>;
@@ -130,7 +131,7 @@ export class ProductsAlbumComponent implements OnInit {
   {
     console.log("--------- ADD to trolley -------------> ITEM ID: ", this._selectedProducts);
 
-    this.trolleyService.addProductsToTrolley(this._selectedProducts)
+    this.trolleyService.addProductsToTrolley(this._userId, this._selectedProducts)
     .subscribe(data => {
       console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX API RESPONSE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", data);
     });    

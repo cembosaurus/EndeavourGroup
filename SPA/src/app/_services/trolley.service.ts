@@ -15,7 +15,8 @@ import { TrolleyProductUpdateDTO } from '../_models/TrolleyProductUpdateDTO';
 export class TrolleyService {
 
   _APIServiceResult: APIServiceResult | undefined;
-  _trolleyUrl = environment.TrolleyServiceUrl;
+  _apiGatewayUrl = environment.gatewayUrl;
+  
 
 
   constructor(private http: HttpClient) { }
@@ -29,13 +30,13 @@ export class TrolleyService {
 
 
 
-  addProductsToTrolley(products: TrolleyProductUpdateDTO[]): Observable<APIServiceResult>
+  addProductsToTrolley(userId: number, products: TrolleyProductUpdateDTO[]): Observable<APIServiceResult>
   {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     })
 
-    return this.http.post<APIServiceResult>(this._trolleyUrl + "trolley/products", {Products: products},{ headers: headers });
+    return this.http.post<APIServiceResult>(this._apiGatewayUrl + "trolley/" + userId + "/products", {Products: products},{ headers: headers });
   }
 
 
@@ -46,6 +47,12 @@ export class TrolleyService {
   // }
 
 
+
+
+  getTrolley(userId: number): Observable<APIServiceResult>
+  {
+    return this.http.get<APIServiceResult>(this._apiGatewayUrl + "trolley/" + userId);
+  }
 
 }
 

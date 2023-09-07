@@ -7,10 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'SPA';
+
+  _userId: number = 0;
 
   constructor() { }
 
 
+  userIdChanged(){console.log("User ID: ", this._userId)}
 
 }
