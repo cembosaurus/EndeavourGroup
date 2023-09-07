@@ -4,4 +4,6 @@ export interface ProductPrice {
     salePrice: number;
     rrp: number;
     discountPercent: number;
+    Discount: number;
+    DiscountedPrice: number
 }
