@@ -6,15 +6,15 @@ Trolley - User ID: {{_userId}}
 <div class="container my-5">     
   <div class="row">
     
-    <div>
-        <h4 class="card-title">Trolley ID: {{_trolley?.TrolleyId}}</h4>
-        <h6 class="card-text">User ID: $AU{{_trolley?.UserId}}</h6>
-        <h6 class="card-text">Total: $AU{{_trolley?.Total}} %</h6>
-        <h6 class="card-text">Discounted Total: $AU{{_trolley?.DiscountedTotal}}</h6>
-        <h6 class="card-text">Saved Total: $AU{{_trolley?.SavedTotal}}</h6>
+    <div class="card w-100 my-2 shadow-2-strong">
+        <h4 class="card-title">Trolley ID: {{_trolley.TrolleyId}}</h4>
+        <h6 class="card-text">User ID: $AU{{_trolley.UserId}}</h6>
+        <h6 class="card-text">Total: $AU{{_trolley.Total}} %</h6>
+        <h6 class="card-text">Discounted Total: $AU{{_trolley.DiscountedTotal}}</h6>
+        <h6 class="card-text">Saved Total: $AU{{_trolley.SavedTotal}}</h6>
       </div>
 
-    <div *ngFor="let product of _trolley?.TrolleyProducts" class="col-lg-3 col-md-6 col-sm-6 d-flex">
+    <div *ngFor="let product of _trolley.TrolleyProducts" class="col-lg-3 col-md-6 col-sm-6 d-flex">
 
       <div class="card w-100 my-2 shadow-2-strong">
 

@@ -1,8 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TrolleyService } from '../../../../_services/trolley.service';
-import { CatalogueProduct } from '../../../../_models/catalogueProduct';
 import { APIServiceResult } from '../../../../_models/APIServiceResult';
-import { environment } from '../../../../environments/environment';
 import { TrolleyReadDTO } from 'src/app/_models/TrolleyReadDTO';
 
 
@@ -12,18 +10,29 @@ import { TrolleyReadDTO } from 'src/app/_models/TrolleyReadDTO';
   templateUrl: './trolley.component.html',
   styleUrls: ['./trolley.component.css']
 })
-export class TrolleyComponent implements OnInit, OnChanges{
+export class TrolleyComponent implements OnChanges{
 
   @Input() _userId: number = 0;
-  _photosURL = environment.gatewayUrl + 'photos/';
-  _catalogueProducts: CatalogueProduct[] | undefined;
-  _trolley: TrolleyReadDTO | undefined;
-
-  constructor(private trolleyService: TrolleyService) { }
+  _trolley: TrolleyReadDTO;
 
 
-  ngOnInit(): void {
-    this.getTroley();
+  constructor(private trolleyService: TrolleyService) { 
+    this._trolley = {
+        TrolleyId: "",
+        UserId: 0,
+        Total: 0,
+        DiscountedTotal: 0,
+        SavedTotal: 0,
+        TrolleyProducts: [{
+          ProductId: 0,
+          Name: "",
+          SalePrice: 0,
+          Amount: 0,
+          ProductTotal: 0,
+          ProductDiscountedPrice: 0,
+          Saved: 0,
+        }]
+      };
   }
 
 
