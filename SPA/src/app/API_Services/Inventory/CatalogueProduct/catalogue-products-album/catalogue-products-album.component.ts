@@ -35,6 +35,10 @@ export class ProductsAlbumComponent implements OnInit {
     this.productsService.getProducts()
       .subscribe((result: APIServiceResult) => {
         this._catalogueProducts = result.data;
+
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", this._catalogueProducts );
+
+
       });
   }
 
