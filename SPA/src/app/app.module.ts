@@ -13,6 +13,7 @@ import { ProductsAlbumComponent } from './API_Services/Inventory/CatalogueProduc
 import { HttpHeaderInterceptor } from './_interceptors/http.header.interceptor';
 import { HttpImagePipe } from './_pipes/http.image.pipe';
 import { AddCatalogueProductPopUpComponent } from './API_Services/Trolley/Trolley/add-catalogue-product-pop-up/add-catalogue-product-pop-up.component';
+import { TrolleyComponent } from './API_Services/Trolley/Trolley/trolley/trolley.component';
 // import {enableProdMode} from '@angular/core';
 
 
@@ -22,7 +23,8 @@ import { AddCatalogueProductPopUpComponent } from './API_Services/Trolley/Trolle
     AppComponent,
     ProductsAlbumComponent,
     HttpImagePipe,
-    AddCatalogueProductPopUpComponent
+    AddCatalogueProductPopUpComponent,
+    TrolleyComponent
   ],
   //entryComponents: [AddCatalogueProductPopUpComponent],
   imports: [
