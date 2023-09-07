@@ -27,18 +27,18 @@ export class TrolleyComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.getProducts();
+    //this.getProducts();
   }
 
 
 
-  getProducts()
-  {
-    this.trolleyService.getTrolley()
-      .subscribe((result: APIServiceResult) => {
-        this._catalogueProducts = result.data;
-      });
-  }
+  // getProducts()
+  // {
+  //   this.trolleyService.getTrolley()
+  //     .subscribe((result: APIServiceResult) => {
+  //       this._catalogueProducts = result.data;
+  //     });
+  // }
 
 
 
