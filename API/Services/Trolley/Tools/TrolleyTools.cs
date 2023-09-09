@@ -30,6 +30,8 @@ namespace Trolley.Tools
         {
             if (trolley == null)
                 return _resultFact.Result<decimal>(0, false, $"Trolley was NOT provided !");
+            if (!trolley.TrolleyProducts.Any())
+                return _resultFact.Result(trolley.Total, false, $"NO product found in trolley. Total is: '{trolley.Total}'");
 
 
             var message = "";

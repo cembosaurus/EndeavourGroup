@@ -139,7 +139,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.Tools
 
 
             Assert.IsFalse(result.Status);
-            Assert.That(result.Message, Is.EqualTo($"NO products found in trolley. Total is: '{_trolley.Total}'"));
+            Assert.That(result.Message, Is.EqualTo($"NO product found in trolley. Total is: '{_trolley.Total}'"));
         }
 
 
