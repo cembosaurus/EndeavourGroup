@@ -13,27 +13,10 @@ import { TrolleyReadDTO } from 'src/app/_models/TrolleyReadDTO';
 export class TrolleyComponent implements OnChanges{
 
   @Input() _userId: number = 0;
-  _trolley: TrolleyReadDTO;
+  _trolley: TrolleyReadDTO | undefined;
 
 
-  constructor(private trolleyService: TrolleyService) { 
-    this._trolley = {
-        TrolleyId: "",
-        UserId: 0,
-        Total: 0,
-        DiscountedTotal: 0,
-        SavedTotal: 0,
-        TrolleyProducts: [{
-          ProductId: 0,
-          Name: "",
-          SalePrice: 0,
-          Amount: 0,
-          ProductTotal: 0,
-          ProductDiscountedPrice: 0,
-          Saved: 0,
-        }]
-      };
-  }
+  constructor(private trolleyService: TrolleyService) { }
 
   
 

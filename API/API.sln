@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory", "Services\Inven
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trolley", "Services\Trolley\Trolley.csproj", "{0760BC39-4A76-4EF4-AC16-B6FEE2324042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticContent", "Services\StaticContent\StaticContent.csproj", "{EDBDA0C9-652E-4053-AEDF-05476718D485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticContent", "Services\StaticContent\StaticContent.csproj", "{EDBDA0C9-652E-4053-AEDF-05476718D485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndeavourGroup.API.Test", "EndeavourGroup.API.Test\EndeavourGroup.API.Test.csproj", "{286F959F-9A25-42A1-8595-7C14A52097DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{EDBDA0C9-652E-4053-AEDF-05476718D485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBDA0C9-652E-4053-AEDF-05476718D485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBDA0C9-652E-4053-AEDF-05476718D485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{286F959F-9A25-42A1-8595-7C14A52097DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{286F959F-9A25-42A1-8595-7C14A52097DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{286F959F-9A25-42A1-8595-7C14A52097DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{286F959F-9A25-42A1-8595-7C14A52097DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

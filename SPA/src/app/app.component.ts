@@ -13,6 +13,15 @@ export class AppComponent {
   constructor() { }
 
 
-  userIdChanged(){console.log("User ID: ", this._userId)}
+  userIdChanged()
+  {
+    console.log("User ID: ", this._userId)
+  }
+
+
+  userIdSubmited(event: any) 
+  {
+    console.log(event.target.value);
+  }
 
 }
