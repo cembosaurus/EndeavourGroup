@@ -10,12 +10,12 @@ using Trolley.Tools;
 
 
 
-namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
+namespace EndeavourGroup.API.Test.Services.Trolley.Tools
 {
     [TestFixture]
     public class TrolleyTools_Test
     {
-        private TrolleyTools _trolleyHelper;
+        private TrolleyTools _trolleyTools;
 
         private Mock<IHttpInventoryService> _httpInventoryService = new Mock<IHttpInventoryService>();
         private IServiceResultFactory _resultFact = new ServiceResultFactory();
@@ -75,6 +75,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
                 + _trolley.TrolleyProducts.ElementAt(1).Amount * _productPrice2.SalePrice 
                 + _trolley.TrolleyProducts.ElementAt(2).Amount * _productPrice3.SalePrice;
 
+            _trolleyTools = new TrolleyTools(_resultFact, _httpInventoryService.Object);
         }
 
 
@@ -91,7 +92,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             _httpInventoryService.Setup(i => i.GetProductPriceById(_trolleyProduct3.ProductId)).Returns(Task.FromResult(_resultFact.Result(_productPrice3ReadDTO, true)));
 
 
-            var result = _trolleyHelper.UpdateTrolleyTotal(_trolley).Result;
+            var result = _trolleyTools.UpdateTrolleyTotal(_trolley).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -109,7 +110,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             _httpInventoryService.Setup(i => i.GetProductPriceById(_trolleyProduct3.ProductId)).Returns(Task.FromResult(_resultFact.Result(_productPrice3ReadDTO, true)));
 
 
-            var result = _trolleyHelper.UpdateTrolleyTotal(_trolley).Result;
+            var result = _trolleyTools.UpdateTrolleyTotal(_trolley).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -121,7 +122,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
         [Test]
         public void UpdateTrolleyTotal_TrolleyNotProvided_ReturnsMessage()
         {
-            var result = _trolleyHelper.UpdateTrolleyTotal(It.IsAny<Trolley_model>()).Result;
+            var result = _trolleyTools.UpdateTrolleyTotal(It.IsAny<Trolley_model>()).Result;
 
 
             Assert.IsFalse(result.Status);
@@ -134,7 +135,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
         {
             _trolley.TrolleyProducts = new List<TrolleyProduct>();
 
-            var result = _trolleyHelper.UpdateTrolleyTotal(_trolley).Result;
+            var result = _trolleyTools.UpdateTrolleyTotal(_trolley).Result;
 
 
             Assert.IsFalse(result.Status);
@@ -154,7 +155,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             _httpInventoryService.Setup(i => i.GetInstockCount(It.IsAny<int>())).Returns(Task.FromResult(_resultFact.Result(_product1_CountInStock, true)));
 
 
-            var result = _trolleyHelper.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
+            var result = _trolleyTools.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -172,7 +173,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             _httpInventoryService.Setup(i => i.GetInstockCount(It.IsAny<int>())).Returns(Task.FromResult(_resultFact.Result(It.IsAny<int>(), false)));
 
 
-            var result = _trolleyHelper.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
+            var result = _trolleyTools.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -190,7 +191,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             _httpInventoryService.Setup(i => i.GetInstockCount(It.IsAny<int>())).Returns(Task.FromResult(_resultFact.Result(_product1_CountInStock, true)));
 
 
-            var result = _trolleyHelper.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
+            var result = _trolleyTools.AddProductsToTrolley(_trolley, newTrolleyProducts).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -208,7 +209,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             var product1_AmountInTrolleyBeforeAdding = _trolley.TrolleyProducts.ElementAt(0).Amount;
 
 
-            var result = _trolleyHelper.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
+            var result = _trolleyTools.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -225,7 +226,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             var trolleyProductsToRemove = new List<TrolleyProduct> { _nonExistingProduct };
 
 
-            var result = _trolleyHelper.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
+            var result = _trolleyTools.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
 
 
             Assert.IsTrue(result.Status);
@@ -243,7 +244,7 @@ namespace EndeavourGroup.API.Test.Services.Trolley.TrolleyBusinessLogic
             var trolleyProductsToRemove = new List<TrolleyProduct> { new TrolleyProduct { ProductId = 1, Amount = tooHighAmountToRemove } };
 
 
-            var result = _trolleyHelper.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
+            var result = _trolleyTools.RemoveProductsFromTrolley(_trolley, trolleyProductsToRemove).Result;
 
 
             Assert.IsTrue(result.Status);
