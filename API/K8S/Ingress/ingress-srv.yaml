@@ -10,13 +10,6 @@ spec:
   - host: endeavourgroup.com
     http:
       paths:
-      - path: /api/product
-        pathType: Prefix
-        backend:
-          service:
-            name: api-gateway-service-clusterip-srv
-            port:
-              number: 80
       - path: /api/catalogueproduct
         pathType: Prefix
         backend:
@@ -38,4 +31,11 @@ spec:
             name: api-gateway-service-clusterip-srv
             port:
               number: 80
-
+      - path: /api/photos
+        pathType: Prefix
+        backend:
+          service:
+            name: api-gateway-service-clusterip-srv
+            port:
+              number: 80
+              

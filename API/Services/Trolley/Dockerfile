@@ -10,10 +10,10 @@ COPY ["API/Services/Trolley/Trolley.csproj", "Services/Trolley/"]
 COPY ["API/Business/Business.csproj", "Business/"]
 RUN dotnet restore "Services/Trolley/Trolley.csproj"
 COPY . .
-RUN dotnet build "Services/Trolley/Trolley.csproj" -c Release -o /app/build
+RUN dotnet build "API/Services/Trolley/Trolley.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Services/Trolley/Trolley.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "API/Services/Trolley/Trolley.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

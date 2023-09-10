@@ -5,13 +5,8 @@
 
 
 
-
 ----------------------- DOCKER --------------------------------
 
-
-
-
-HTTP:
 
 docker build -t cembo/endeavourgroup_api_gateway -f api/api_gateway/Dockerfile .
 docker push cembo/endeavourgroup_api_gateway
@@ -26,31 +21,28 @@ docker build -t cembo/endeavourgroup_static_content -f api/services/staticconten
 docker push cembo/endeavourgroup_static_content
 
 
+
 ----------------------- KUBERNETES --------------------------------
 
 ----------- DB:
 
-
-HTTP:
-
 kubectl create secret generic inventory-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
 kubectl create secret generic trolley-mssql --from-literal=SA_PASSWORD="pa55w0rd!"
 
-kubectl apply -f inventory-pvc.yaml
-kubectl apply -f trolley-pvc.yaml
+kubectl apply -f api/k8s/services/inventory/inventory-pvc.yaml
+kubectl apply -f api/k8s/services/trolley/trolley-pvc.yaml
 
-kubectl apply -f inventory-mssql-depl.yaml
-kubectl apply -f trolley-mssql-depl.yaml
+kubectl apply -f api/k8s/services/inventory/inventory-mssql-depl.yaml
+kubectl apply -f api/k8s/services/trolley/trolley-mssql-depl.yaml
 
 
 
-DB USER:
+DB USER (optionaly):
 
-RUN: SQL script 'create-db-user.sql' for all DBs to create 'testUser':
+RUN: SQL script 'create-db-user.sql' for all DBs to create 'testUser'
+
 
 DB LogIns:
-
-HTTP:
 
 - inventory-mssql-clusterip-srv, port: 1002
 - trolley-mssql-clusterip-srv, port: 1003
@@ -59,12 +51,15 @@ HTTP:
 
 ----------- SERVICES:
 
-HTTP:
+kubectl apply -f api/k8s/api_gateway/api-gateway-service-depl.yaml
+kubectl apply -f api/k8s/services/inventory/inventory-service-depl.yaml
+kubectl apply -f api/k8s/services/trolley/trolley-service-depl.yaml
+kubectl apply -f api/k8s/services/static_content/static-content-service-depl.yaml
 
-kubectl apply -f api-gateway-service-depl.yaml
-kubectl apply -f inventory-service-depl.yaml
-kubectl apply -f trolley-service-depl.yaml
-kubectl apply -f static-content-service-depl.yaml
+
+----------- INGRESS:
+
+kubectl apply -f api/k8s/ingress/ingress-srv.yaml
 
 
 
@@ -81,15 +76,11 @@ kubectl apply -f static-content-service-depl.yaml
 
 ----------- SERVICES:
 
-HTTP:
 
 kubectl delete deployment api-gateway-service-depl
 kubectl delete deployment inventory-service-depl
 kubectl delete deployment trolley-service-depl
 kubectl delete deployment static-content-service-depl
-
-
-HTTP:
 
 kubectl delete service api-gateway-service-clusterip-srv
 kubectl delete service inventory-service-clusterip-srv
@@ -99,7 +90,6 @@ kubectl delete service static-content-service-clusterip-srv
 
 ----------- DB:
 
-HTTP:
 
 kubectl delete deployment inventory-mssql-depl
 kubectl delete deployment trolley-mssql-depl
@@ -156,6 +146,7 @@ kubectl apply -f api/k8s/api_gateway/api-gateway-service-depl.yaml
 kubectl apply -f api/k8s/services/inventory/inventory-service-depl.yaml
 kubectl apply -f api/k8s/services/trolley/trolley-service-depl.yaml
 kubectl apply -f api/k8s/services/static_content/static-content-service-depl.yaml
+kubectl apply -f api/k8s/ingress/ingress-srv.yaml
 kubectl get pods
 
 ---
