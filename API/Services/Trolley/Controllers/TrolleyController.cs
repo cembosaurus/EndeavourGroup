@@ -26,7 +26,7 @@ namespace Trolley.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetTrolleys()
         {
             var result = await _trolleyService.GetTrolleys();
