@@ -173,6 +173,7 @@ kubectl delete pvc inventory-mssql-claim
 kubectl delete pvc trolley-mssql-claim
 kubectl delete secret inventory-mssql
 kubectl delete secret trolley-mssql
+kubectl delete ingress ingress-srv
 kubectl get pods
 
 ---
