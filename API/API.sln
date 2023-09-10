@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trolley", "Services\Trolley
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticContent", "Services\StaticContent\StaticContent.csproj", "{EDBDA0C9-652E-4053-AEDF-05476718D485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndeavourGroup.API.Test", "EndeavourGroup.API.Test\EndeavourGroup.API.Test.csproj", "{286F959F-9A25-42A1-8595-7C14A52097DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndeavourGroup.API.Test", "EndeavourGroup.API.Test\EndeavourGroup.API.Test.csproj", "{286F959F-9A25-42A1-8595-7C14A52097DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

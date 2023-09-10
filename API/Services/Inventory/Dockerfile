@@ -6,8 +6,8 @@ ENV ASPNETCORE_URLS=http://+:80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Services/Inventory/Inventory.csproj", "Services/Inventory/"]
-COPY ["Business/Business.csproj", "Business/"]
+COPY ["API/Services/Inventory/Inventory.csproj", "Services/Inventory/"]
+COPY ["API/Business/Business.csproj", "Business/"]
 RUN dotnet restore "Services/Inventory/Inventory.csproj"
 COPY . .
 RUN dotnet build "Services/Inventory/Inventory.csproj" -c Release -o /app/build

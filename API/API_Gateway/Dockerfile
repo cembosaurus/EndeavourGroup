@@ -6,8 +6,8 @@ ENV ASPNETCORE_URLS=http://+:80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["API_Gateway/API_Gateway.csproj", "API_Gateway/"]
-COPY ["Business/Business.csproj", "Business/"]
+COPY ["API/API_Gateway/API_Gateway.csproj", "API_Gateway/"]
+COPY ["API/Business/Business.csproj", "Business/"]
 RUN dotnet restore "API_Gateway/API_Gateway.csproj"
 COPY . .
 RUN dotnet build "API_Gateway/API_Gateway.csproj" -c Release -o /app/build
