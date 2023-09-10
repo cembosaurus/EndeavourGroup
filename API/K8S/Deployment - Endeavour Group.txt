@@ -1,9 +1,15 @@
 
 
+
+- RUN from ROOT 'endeavourgroup' folder:
+
+
+
+
 ----------------------- DOCKER --------------------------------
 
 
-// run from ROOT 'endeavourgroup' folder:
+
 
 HTTP:
 
