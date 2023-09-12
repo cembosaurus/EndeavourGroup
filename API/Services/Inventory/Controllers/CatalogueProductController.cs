@@ -80,9 +80,11 @@ namespace Services.Inventory.Controllers
         [HttpPost("{productId}")]
         public async Task<ActionResult> CreateCatalogueProduct(int productId, CatalogueProductCreateDTO catalogueProductCreateDTO)
         {
-            var result = await _catalogueProductService.CreateCatalogueProduct(productId, catalogueProductCreateDTO);
+            //var result = await _catalogueProductService.CreateCatalogueProduct(productId, catalogueProductCreateDTO);
 
-            return result.Status ? Ok(result) : BadRequest(result);
+            //return result.Status ? Ok(result) : BadRequest(result);
+
+            return Ok(catalogueProductCreateDTO);
         }
 
 

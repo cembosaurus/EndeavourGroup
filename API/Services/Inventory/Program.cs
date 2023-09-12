@@ -1,6 +1,7 @@
 using Business.Filters.Validation;
 using Business.Libraries.ServiceResult;
 using Business.Libraries.ServiceResult.Interfaces;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Inventory.Services;
 using Inventory.Services.Interfaces;
@@ -17,11 +18,14 @@ builder.Services.AddControllers(opt =>
     opt.Filters.Add<ValidationFilter>();
 });
 
-builder.Services.AddFluentValidation(conf => {
-    conf.DisableDataAnnotationsValidation = true;
-    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-    conf.AutomaticValidationEnabled = true;
-});
+//builder.Services.AddFluentValidation(conf => {
+//    conf.DisableDataAnnotationsValidation = true;
+//    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+//    conf.AutomaticValidationEnabled = true;
+//});
+builder.Services.AddFluentValidationAutoValidation(opt => opt.DisableDataAnnotationsValidation = true);
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 builder.Services.AddDbContext<InventoryContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("InventoryConnStr"), opt => opt.EnableRetryOnFailure()));
