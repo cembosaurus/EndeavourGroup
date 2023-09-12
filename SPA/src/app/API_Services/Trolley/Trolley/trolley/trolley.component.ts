@@ -14,6 +14,7 @@ export class TrolleyComponent implements OnChanges{
 
   @Input() _userId: number = 0;
   _trolley: TrolleyReadDTO | undefined;
+  _test = 0;
 
 
   constructor(private trolleyService: TrolleyService) { }
@@ -30,9 +31,9 @@ export class TrolleyComponent implements OnChanges{
   {
     this.trolleyService.getTrolley(this._userId)
       .subscribe((result: APIServiceResult) => {
-        this._trolley = result.data;
+        this._trolley = result.data as TrolleyReadDTO;
 
-
+this._test = 1;
         console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx TROLLEY: ", this._trolley);
 
       });
