@@ -1,7 +1,6 @@
 ﻿using StaticContent.Services.Interfaces;
 
 
-
 namespace StaticContent.Services
 {
     public class ImageFilesService: IImageFilesService
@@ -11,13 +10,13 @@ namespace StaticContent.Services
         private readonly string _imagePath;
 
 
-
         public ImageFilesService(IConfiguration conf)
         {
             _conf = conf;
-
             _imagePath = _conf.GetSection("Images").Value;
         }
+
+
 
 
 

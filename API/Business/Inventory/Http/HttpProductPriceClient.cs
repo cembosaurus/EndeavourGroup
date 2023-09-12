@@ -1,6 +1,5 @@
 ﻿using Business.Inventory.DTOs.ProductPrice;
 using Business.Inventory.Http.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text;

@@ -25,7 +25,6 @@ namespace API_Gateway.HttpServices.Inventory
 
 
 
-
         public async Task<IServiceResult<int>> AddAmountToStock(int productId, int amount)
         {
             var response = await _httpCatalogueProductClient.AddAmountToStock(productId, amount);

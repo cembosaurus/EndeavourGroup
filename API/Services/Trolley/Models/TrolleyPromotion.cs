@@ -3,7 +3,7 @@
 
 namespace Trolley.Models
 {
-    public class TrolleyPromotion
+    public record TrolleyPromotion
     {
         public bool IsOn { get; set; }
         public int TrolleyPromotionTypeId { get; set; }

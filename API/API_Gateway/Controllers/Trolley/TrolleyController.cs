@@ -25,10 +25,6 @@ namespace API_Gateway.Controllers.Trolley
 
 
 
-
-
-
-
         // .... To Do: separate domain into 3 controllers Trolley, TrolleyProducts and TrolleyPromotions so the URL mathces the remote services' URL. Easier to debug.
 
 

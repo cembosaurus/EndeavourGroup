@@ -16,6 +16,7 @@ using Business.Libraries.ServiceResult.Interfaces;
 using Business.Middlewares;
 using Business.Trolley.Http;
 using Business.Trolley.Http.Interfaces;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,11 +26,9 @@ builder.Services.AddControllers(opt =>
     opt.Filters.Add<ValidationFilter>();
 });
 
-builder.Services.AddFluentValidation(conf => {
-    conf.DisableDataAnnotationsValidation = true;
-    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-    conf.AutomaticValidationEnabled = true;
-});
+builder.Services.AddFluentValidationAutoValidation(opt => opt.DisableDataAnnotationsValidation = true);
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssembly(typeof(ValidationFilter).Assembly);
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -68,10 +67,7 @@ builder.Services.AddHttpClient<IHttpTrolleyPromotionClient, HttpTrolleyPromotion
 });
 
 
-
 builder.Services.AddTransient<IServiceResultFactory, ServiceResultFactory>();
-
-
 
 builder.Services.AddCors(options =>
 {
@@ -85,12 +81,9 @@ builder.Services.AddCors(options =>
 });
 
 
-
-
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
-
 
 
 app.UseCors(opt => {
@@ -98,7 +91,6 @@ app.UseCors(opt => {
     .AllowAnyMethod()
     .AllowAnyHeader();
 });
-
 
 
 app.MapControllers();

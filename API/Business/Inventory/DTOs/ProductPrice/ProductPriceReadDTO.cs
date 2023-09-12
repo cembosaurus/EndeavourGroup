@@ -16,7 +16,8 @@
         }
         public decimal DiscountedPrice 
         { 
-            get { 
+            get 
+            { 
                 return DiscountPercent > 0 ? Math.Round(SalePrice - (SalePrice / 100 * DiscountPercent).Value, 2) : SalePrice; 
             } 
         }

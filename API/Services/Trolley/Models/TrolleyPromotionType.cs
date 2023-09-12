@@ -1,6 +1,6 @@
 ﻿namespace Trolley.Models
 {
-    public class TrolleyPromotionType
+    public record TrolleyPromotionType
     {
         public int TrolleyPromotionTypeId { get; set; }
         public string Description { get; set; }

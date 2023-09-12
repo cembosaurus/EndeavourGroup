@@ -24,8 +24,6 @@ namespace Trolley.Tools
 
 
 
-
-
         public async Task<IServiceResult<decimal>> UpdateTrolleyTotal(Trolley_model trolley)
         {
             if (trolley == null)

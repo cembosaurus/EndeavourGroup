@@ -3,7 +3,7 @@
 
 namespace Services.Trolley.Models
 {
-    public class Trolley_model
+    public record Trolley_model
     {
         public Guid TrolleyId { get; set; }
         public int UserId { get; set; }        

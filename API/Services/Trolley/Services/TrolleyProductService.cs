@@ -213,11 +213,9 @@ namespace Trolley.Services
                 return _resultFact.Result<IEnumerable<TrolleyProductReadDTO>>(null, false, $"Trolley '{userId}' doesn't have products !");
 
 
-
             var message = string.Empty;
 
             Console.WriteLine($"--> REMOVING trolley products from trolley '{trolley.TrolleyId}' for user '{trolley.UserId}' ......");
-
 
 
             var productsToDelete = trolley.TrolleyProducts.Where(ci => productIds.Contains(ci.ProductId)).ToList();

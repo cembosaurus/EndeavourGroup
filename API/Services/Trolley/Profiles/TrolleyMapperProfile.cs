@@ -28,14 +28,14 @@ namespace Trolley.Profiles
             CreateMap<ProductReadDTO, TrolleyProductReadDTO>();
             CreateMap<ProductPriceReadDTO, TrolleyProductReadDTO>();
             CreateMap<CatalogueProductReadDTO, CatalogueProductReadDTO_View>()
-                .ForMember(dest => dest.SalesPrice, cfg => cfg.MapFrom(src => src.ProductPrice.SalePrice))
-                .ForMember(dest => dest.Name, cfg => cfg.MapFrom(src => src.Product.Name));
+                .ForMember(dest => dest.SalesPrice, opt => opt.MapFrom(src => src.ProductPrice.SalePrice))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Product.Name));
 
 
             // Trolley-Promotions:
 
             CreateMap<TrolleyPromotion, TrolleyPromotionReadDTO>()
-                .ForMember(dest => dest.TrolleyPromotionType, cfg => cfg.MapFrom(src => src.TrolleyPromotionType));
+                .ForMember(dest => dest.TrolleyPromotionType, opt => opt.MapFrom(src => src.TrolleyPromotionType));
             CreateMap<TrolleyPromotionCreateDTO, TrolleyPromotion>();
             CreateMap<TrolleyPromotionType, TrolleyPromotionTypeReadDTO>();
             CreateMap<TrolleyPromotionTypeCreateDTO, TrolleyPromotionType>();

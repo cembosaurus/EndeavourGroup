@@ -24,8 +24,6 @@ namespace API_Gateway.HttpServices.Trolley
 
 
 
-
-
         public async Task<IServiceResult<IEnumerable<TrolleyPromotionReadDTO>>> GetAllTrolleyPromotions()
         {
             var response = await _httpTrolleyPromotionClient.GetAllTrolleyPromotions();

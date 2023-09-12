@@ -28,8 +28,7 @@ namespace Business.Inventory.Http
 
 
 
-        // multiple method call error FIXED:
-        // HttpRequestMessage - CAN NOT be reused. It doesn't change streamed content on .SendAsync() !!!!
+        // multiple method call error FIXED: HttpRequestMessage - CAN NOT be reused. It doesn't change streamed content on .SendAsync() !!!!
 
 
 

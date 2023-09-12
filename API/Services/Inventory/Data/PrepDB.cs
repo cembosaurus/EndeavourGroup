@@ -5,16 +5,16 @@ namespace Services.Inventory.Data
 {
     public static class PrepDB
     {
-        public static void PrepPopulation(IApplicationBuilder app, bool isProd, IConfiguration config)
+        public static void PrepPopulation(IApplicationBuilder app, bool isProd)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<InventoryContext>(), isProd, config);
+                SeedData(serviceScope.ServiceProvider.GetService<InventoryContext>(), isProd);
             }
         }
 
 
-        private static void SeedData(InventoryContext context, bool isProd, IConfiguration config)
+        private static void SeedData(InventoryContext context, bool isProd)
         {
             if (isProd)
             {

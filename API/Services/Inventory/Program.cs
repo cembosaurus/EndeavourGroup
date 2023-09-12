@@ -41,7 +41,7 @@ var app = builder.Build();
 
 app.MapControllers();
 
-PrepDB.PrepPopulation(app, app.Environment.IsProduction(), app.Configuration);
+PrepDB.PrepPopulation(app, app.Environment.IsProduction());
 
 
 app.Run();
