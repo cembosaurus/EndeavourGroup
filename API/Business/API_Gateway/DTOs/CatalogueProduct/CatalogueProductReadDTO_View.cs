@@ -1,6 +1,6 @@
 ﻿namespace Business.API_Gateway.DTOs.CatalogueProduct
 {
-    public class CatalogueProductReadDTO_View
+    public record CatalogueProductReadDTO_View
     {
         public int ProductId { get; set; }
         public string Name { get; set; }

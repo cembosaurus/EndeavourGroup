@@ -4,7 +4,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class AddProductsToTrolleyDTO
+    public record AddProductsToTrolleyDTO
     {
         public int? UserId { get; set; }
         public IEnumerable<TrolleyProductUpdateDTO> Products { get; set; }

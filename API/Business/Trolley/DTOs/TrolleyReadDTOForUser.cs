@@ -4,7 +4,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class TrolleyReadDTOForUser
+    public record TrolleyReadDTOForUser
     {
         public int UserId { get; set; }
         public decimal Total { get; set; }

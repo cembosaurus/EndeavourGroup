@@ -2,7 +2,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class TrolleyPromotionReadDTO
+    public record TrolleyPromotionReadDTO
     {
         public int ProductId { get; set; }
         public int SpendLevel { get; set; }

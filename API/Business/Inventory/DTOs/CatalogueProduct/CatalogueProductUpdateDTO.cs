@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Business.Inventory.DTOs.CatalogueProduct
 {
-    public class CatalogueProductUpdateDTO
+    public record CatalogueProductUpdateDTO
     {
         public string? Description { get; set; }
         public ProductPriceUpdateDTO? ProductPrice { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Services.Inventory.Models
 {
-    public class ProductPrice
+    public record ProductPrice
     {
         public int ProductId { get; set; }
         public decimal SalePrice { get; set; }

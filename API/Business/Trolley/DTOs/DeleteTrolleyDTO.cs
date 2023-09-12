@@ -4,7 +4,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class DeleteTrolleyDTO
+    public record DeleteTrolleyDTO
     {
         public int UserId { get; set; }
 

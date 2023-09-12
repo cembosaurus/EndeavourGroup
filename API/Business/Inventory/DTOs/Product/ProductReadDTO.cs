@@ -1,6 +1,6 @@
 ﻿namespace Business.Inventory.DTOs.Product
 {
-    public class ProductReadDTO
+    public record ProductReadDTO
     {
         public int UserId { get; set; }
         public int Id { get; set; }

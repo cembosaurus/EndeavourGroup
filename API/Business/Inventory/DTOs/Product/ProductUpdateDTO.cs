@@ -2,7 +2,7 @@
 
 namespace Business.Inventory.DTOs.Product
 {
-    public class ProductUpdateDTO
+    public record ProductUpdateDTO
     {
         public string? Name { get; set; }
         public string? Notes { get; set; }

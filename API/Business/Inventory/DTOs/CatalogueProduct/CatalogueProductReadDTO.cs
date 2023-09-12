@@ -3,7 +3,7 @@ using Business.Inventory.DTOs.ProductPrice;
 
 namespace Business.Inventory.DTOs.CatalogueProduct
 {
-    public class CatalogueProductReadDTO
+    public record CatalogueProductReadDTO
     {
         public int ProductId { get; set; }
         public string? Description { get; set; }

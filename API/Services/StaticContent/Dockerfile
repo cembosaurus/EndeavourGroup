@@ -6,9 +6,9 @@ ENV ASPNETCORE_URLS=http://+:80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["API/Services/StaticContent/StaticContent.csproj", "Services/StaticContent/"]
-COPY ["API/Business/Business.csproj", "Business/"]
-RUN dotnet restore "Services/StaticContent/StaticContent.csproj"
+COPY ["API/Services/StaticContent/StaticContent.csproj", "API/Services/StaticContent/"]
+COPY ["API/Business/Business.csproj", "API/Business/"]
+RUN dotnet restore "API/Services/StaticContent/StaticContent.csproj"
 COPY . .
 RUN dotnet build "API/Services/StaticContent/StaticContent.csproj" -c Release -o /app/build
 

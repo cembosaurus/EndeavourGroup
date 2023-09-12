@@ -1,6 +1,6 @@
 ﻿namespace Business.Inventory.DTOs.ProductPrice
 {
-    public class ProductPriceReadDTO
+    public record ProductPriceReadDTO
     {
         public int ProductId { get; set; }
         public decimal SalePrice { get; set; }

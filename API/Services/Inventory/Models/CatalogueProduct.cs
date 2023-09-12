@@ -1,6 +1,6 @@
 ﻿namespace Services.Inventory.Models
 {
-    public class CatalogueProduct
+    public record CatalogueProduct
     {
         public int ProductId { get; set; }
         public string? Description { get; set; }

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Business.Trolley.DTOs
 {
-    public class TrolleyPromotionCreateDTO
+    public record TrolleyPromotionCreateDTO
     {
         public bool IsOn { get; set; }
         public int TrolleyPromotionTypeId { get; set; }

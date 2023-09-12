@@ -2,7 +2,7 @@
 
 namespace Business.Inventory.DTOs.ProductPrice
 {
-    public class ProductPriceCreateDTO
+    public record ProductPriceCreateDTO
     {
         public decimal SalePrice { get; set; }
         public decimal? RRP { get; set; }

@@ -4,7 +4,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class ExistsTrolleyByTrolleyIdDTO
+    public record ExistsTrolleyByTrolleyIdDTO
     {
         public Guid TrolleyId { get; set; }
 

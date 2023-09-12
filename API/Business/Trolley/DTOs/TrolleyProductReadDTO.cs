@@ -3,7 +3,7 @@
 
 namespace Business.Trolley.DTOs
 {
-    public class TrolleyProductReadDTO
+    public record TrolleyProductReadDTO
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
