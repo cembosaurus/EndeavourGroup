@@ -18,11 +18,6 @@ builder.Services.AddControllers(opt =>
     opt.Filters.Add<ValidationFilter>();
 });
 
-//builder.Services.AddFluentValidation(conf => {
-//    conf.DisableDataAnnotationsValidation = true;
-//    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-//    conf.AutomaticValidationEnabled = true;
-//});
 builder.Services.AddFluentValidationAutoValidation(opt => opt.DisableDataAnnotationsValidation = true);
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(typeof(ValidationFilter).Assembly);
@@ -38,7 +33,7 @@ builder.Services.AddScoped<IProductPriceService, ProductPriceService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 builder.Services.AddScoped<ICatalogueProductRepository, CatalogueProductRepository>();
-builder.Services.AddTransient<IServiceResultFactory, ServiceResultFactory>();
+builder.Services.AddSingleton<IServiceResultFactory, ServiceResultFactory>();
 
 
 

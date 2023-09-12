@@ -12,7 +12,7 @@ namespace Business.Trolley.DTOs
 
 
 
-    public class CreateTrolleyDTO_V : AbstractValidator<GetTrolleyProductsDTO>
+    public class CreateTrolleyDTO_V : AbstractValidator<CreateTrolleyDTO>
     {
         public CreateTrolleyDTO_V()
         {

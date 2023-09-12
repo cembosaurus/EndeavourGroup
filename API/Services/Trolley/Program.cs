@@ -3,6 +3,7 @@ using Business.Inventory.Http;
 using Business.Inventory.Http.Interfaces;
 using Business.Libraries.ServiceResult;
 using Business.Libraries.ServiceResult.Interfaces;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +25,9 @@ builder.Services.AddControllers(opt =>
     opt.Filters.Add<ValidationFilter>();
 });
 
-builder.Services.AddFluentValidation(conf => {
-    conf.DisableDataAnnotationsValidation = true;
-    conf.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-    conf.AutomaticValidationEnabled = true;
-});
+builder.Services.AddFluentValidationAutoValidation(opt => opt.DisableDataAnnotationsValidation = true);
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssembly(typeof(ValidationFilter).Assembly);
 
 builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 builder.Services.AddDbContext<TrolleyContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("TrolleyConnStr"), opt => opt.EnableRetryOnFailure()));
@@ -48,8 +47,7 @@ builder.Services.AddHttpClient<IHttpProductPriceClient, HttpProductPriceClient>(
 builder.Services.AddHttpClient<IHttpProductClient, HttpProductClient>();
 builder.Services.AddHttpClient<IHttpCatalogueProductClient, HttpCatalogueProductClient>();
 
-builder.Services.AddScoped<IServiceResultFactory, ServiceResultFactory>();
-
+builder.Services.AddSingleton<IServiceResultFactory, ServiceResultFactory>();
 
 
 var app = builder.Build();
