@@ -1,31 +1,29 @@
 <h1>******************************************* UNDER CONSTRUCTION **************************************************</h1>
 
-<h3>Trolley - User ID: {{_userId}}</h3>
-
 <div class="container my-5">  
 
   <div  *ngIf="_trolley != null" class="row">
     
     <div class="card w-100 my-2 shadow-2-strong">
-        <h6 class="card-tite">Trolley ID: {{_trolley.TrolleyId}}</h6>
-        <h6 class="card-text">User ID: $AU {{_trolley.UserId}}</h6>
-        <h6 class="card-text">Total: $AU {{_trolley.Total}} %</h6>
-        <h6 class="card-text">Discounted Total: $AU {{_trolley.DiscountedTotal}}</h6>
-        <h6 class="card-text">Saved Total: $AU {{_trolley.SavedTotal}}</h6>
+        <h6 class="card-tite">Trolley ID: {{_trolley.trolleyId}}</h6>
+        <h6 class="card-text">User ID: $AU {{_trolley.userId}}</h6>
+        <h6 class="card-text">Total: $AU {{_trolley.total}} %</h6>
+        <h6 class="card-text">Discounted Total: $AU {{_trolley.discountedTotal}}</h6>
+        <h6 class="card-text">Saved Total: $AU {{_trolley.savedTotal}}</h6>
       </div>
 
-    <div *ngFor="let product of _trolley.TrolleyProducts" class="col-lg-3 col-md-6 col-sm-6 d-flex">
+    <div *ngFor="let product of _trolley.trolleyProducts" class="col-lg-3 col-md-6 col-sm-6 d-flex">
 
       <div class="card w-100 my-2 shadow-2-strong">
 
         <div class="card-body">
           <div>
-            <h4 class="card-title">{{product.Name}}</h4>
-            <h6 class="card-text">Price: $AU{{product.SalePrice}}</h6>
-            <h6 class="card-text">Amount {{product.Amount}} %</h6>
-            <h6 class="card-text">ProductTotal $AU{{product.ProductTotal}}</h6>
-            <h6 class="card-text">Product Discounted Price $AU{{product.ProductDiscountedPrice}}</h6>
-            <h6 class="card-text">Saved $AU{{product.Saved}}</h6>
+            <h4 class="card-title">{{product.name}}</h4>
+            <h6 class="card-text">Price: $AU{{product.salePrice}}</h6>
+            <h6 class="card-text">Amount {{product.amount}} %</h6>
+            <h6 class="card-text">ProductTotal $AU{{product.productTotal}}</h6>
+            <h6 class="card-text">Product Discounted Price $AU{{product.productDiscountedPrice}}</h6>
+            <h6 class="card-text">Saved $AU{{product.saved}}</h6>
           </div>
 
         </div>

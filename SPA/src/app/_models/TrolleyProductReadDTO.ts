@@ -2,11 +2,11 @@
 
 export interface TrolleyProductReadDTO {
 
-    ProductId: number;
-    Name: string;
-    SalePrice: number;
-    Amount: number;
-    ProductTotal: number;
-    ProductDiscountedPrice: number;
-    Saved: number;
+    productId: number;
+    name: string;
+    salePrice: number;
+    amount: number;
+    productTotal: number;
+    productDiscountedPrice: number;
+    saved: number;
 }
