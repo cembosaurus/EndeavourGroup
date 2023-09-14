@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   _userId: number = 0;
+  _trolleyExists: boolean = false;
 
   constructor() { }
 
@@ -22,6 +23,13 @@ export class AppComponent {
   userIdSubmited(event: any) 
   {
     console.log(event.target.value);
+  }
+
+  trolleyExists(state: boolean)
+  {
+    this._trolleyExists = state;
+
+    console.log(">>>>>>>>>>>>>>>>>>>>> trolley exists >>>>>>>>>>>>>>>>>", this._trolleyExists);
   }
 
 }

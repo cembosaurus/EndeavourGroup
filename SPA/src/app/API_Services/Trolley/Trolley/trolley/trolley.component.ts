@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { TrolleyService } from '../../../../_services/trolley.service';
 import { APIServiceResult } from '../../../../_models/APIServiceResult';
 import { TrolleyReadDTO } from 'src/app/_models/TrolleyReadDTO';
@@ -13,6 +13,7 @@ import { TrolleyReadDTO } from 'src/app/_models/TrolleyReadDTO';
 export class TrolleyComponent implements OnChanges{
 
   @Input() _userId: number = 0;
+  @Output() _trolleyExists = new EventEmitter<boolean>();
   _trolley: TrolleyReadDTO | undefined;
 
 
@@ -35,6 +36,8 @@ export class TrolleyComponent implements OnChanges{
 
         console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx TROLLEY: ", this._trolley);
 
+
+        this._trolleyExists.emit(result.data == null ? false : true);
       });
   }
 
