@@ -133,7 +133,10 @@ export class ProductsAlbumComponent implements OnInit {
 
     this.trolleyService.addProductsToTrolley(this._userId, this._selectedProducts)
     .subscribe(data => {
+
       console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX API RESPONSE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", data);
+      
+      this._selectedProducts = new Array;
     });    
   }
 
