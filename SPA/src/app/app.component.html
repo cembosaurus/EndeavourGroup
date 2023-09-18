@@ -12,6 +12,6 @@
 
     <app-trolley [_userId]="_userId" (_trolleyExists)="trolleyExists($event)"></app-trolley>
     <app-products-album *ngIf="_trolleyExists" [_userId]="_userId"></app-products-album> 
-    <h1  *ngIf="!_trolleyExists"> Welcome </h1>
+    <h1 style="text-align:center; padding: 20px;"  *ngIf="!_trolleyExists"> Welcome </h1>
 
 </div>
