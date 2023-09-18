@@ -6,8 +6,8 @@
 
 <div>
 
-    <div>
-        User ID: <input [(ngModel)]="_userId" (ngModelChange)="userIdChanged()" name="_userId" />
+    <div style="text-align:center; padding: 20px;">
+        <p style="color:rgb(0, 96, 231);font-size:15px"><strong>User ID:  </strong></p><input [(ngModel)]="_userId" (ngModelChange)="userIdChanged()" name="_userId" />
     </div>
 
     <app-trolley [_userId]="_userId" (_trolleyExists)="trolleyExists($event)"></app-trolley>
